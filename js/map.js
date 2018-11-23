@@ -188,9 +188,9 @@ var map = L.map("map", {
 //     accessToken: 'pk.eyJ1IjoiYnJjbWFwcyIsImEiOiJRZklIbXY0In0.SeDBAb72saeEJhTVDrVusg'
 // }).addTo(map);
 
-lonelylayer = new L.TileLayer.WMS(
-    "https://api.mapbox.com/styles/v1/brcmaps.8j731yn3/cjo9zbafk0ufs2snv0ogclf7b/wmts?access_token=pk.eyJ1IjoiYnJjbWFwcyIsImEiOiJRZklIbXY0In0.SeDBAb72saeEJhTVDrVusg",
-).addTo(map);
+// lonelylayer = new L.TileLayer.WMS(
+//     "https://api.mapbox.com/styles/v1/brcmaps.8j731yn3/cjo9zbafk0ufs2snv0ogclf7b/wmts?access_token=pk.eyJ1IjoiYnJjbWFwcyIsImEiOiJRZklIbXY0In0.SeDBAb72saeEJhTVDrVusg",
+// ).addTo(map);
 
 //gl._glMap.addSource({...})
 
