@@ -9,15 +9,15 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" />
     <link rel="stylesheet" href="css/leaflet-sidebar.min.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-        crossorigin="anonymous">
+          crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/bootstrap-slider.min.css" />
     <link rel="stylesheet" href="css/funkyradio.min.css" />
     <script src="https://cdn.polyfill.io/v2/polyfill.js?features=Array.prototype.map,Array.prototype.includes,Object.values"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-        crossorigin="anonymous"></script>
+            crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
+            crossorigin="anonymous"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
@@ -55,7 +55,8 @@
             outline: none;
             touch-action: none;
             background-color: #ffffff;
-            position: relative;
+
+            /*position: relative;*/
         }
 
         .sidebar-content {
@@ -102,7 +103,7 @@
         .list-group-item-indent {
             padding-left: 30px;
         }
-        
+
         /*
          * styling for external data 
          * from: https://leafletjs.com/examples/choropleth/
@@ -143,15 +144,15 @@
         <div class="sidebar-tabs">
             <ul role="tablist">
                 <li><a href="#home" id="tabhome" role="tab" title="Community Presence Map" data-toggle="popover"
-                        data-trigger="hover" data-placement="right" data-content="Click here to get started"><i class="fa fa-question"></i></a></li>
+                       data-trigger="hover" data-placement="right" data-content="Click here to get started"><i class="fa fa-question"></i></a></li>
                 <li><a href="#people" id="tabpeople" role="tab" data-toggle="popover" data-trigger="hover"
-                        data-placement="right" data-content="Staff and volunteers"><i class="fa fa-user"></i></a></li>
+                       data-placement="right" data-content="Staff and volunteers"><i class="fa fa-user"></i></a></li>
                 <li><a href="#services" id="tabservices" role="tab" data-toggle="popover" data-trigger="hover"
-                        data-placement="right" data-content="Services, shops, properties"><i class="fa fa-plus-square"></i></a></li>
+                       data-placement="right" data-content="Services, shops, properties"><i class="fa fa-plus-square"></i></a></li>
                 <li><a href="#layers" id="tablayers" role="tab" data-toggle="popover" data-trigger="hover"
-                        data-placement="right" data-content="External data"><i class="fa fa-globe-africa"></i></a></li>
+                       data-placement="right" data-content="External data"><i class="fa fa-globe-africa"></i></a></li>
                 <li><a href="#settings" id="tabsettings" role="tab" data-toggle="popover" data-trigger="hover"
-                        data-placement="right" data-content="Other settings"><i class="fa fa-cog"></i></a></li>
+                       data-placement="right" data-content="Other settings"><i class="fa fa-cog"></i></a></li>
             </ul>
 
             <!-- will implement the download button later
@@ -192,7 +193,7 @@
                     staff heatmaps. By default, each person has a 25km radius drawn around them.</p>
                 <h5>More information</h5>
                 <p>There are more interactive maps available on the <a href="http://data.redcross.org.uk" target="_blank">Innovation
-                        &amp; Insight Data Hub</a>.</p>
+                    &amp; Insight Data Hub</a>.</p>
                 <!-- <p>Add a tracker for bugs and feature requests</p> -->
                 <p>This map is developed and maintained by <a href="mailto:MattThomas@redcross.org.uk">Matt Thomas</a>.
                     Please get in touch if you have any comments, questions or suggestions.</p>
@@ -432,7 +433,6 @@
     </div>
 
     <div id="map" class="map"></div>
-
     <!-- Google Stuff-->
     <!-- Google Tag Manager -->
     <!-- <script>(function (w, d, s, l, i) {
@@ -462,10 +462,10 @@
     <script src="data/services_new.js"></script>
     <script src="data/shops.js"></script>
     <script src="data/props.js"></script>
-    <script src="data/destitution.js"></script>
+    <!--<script src="data/destitution.json"></script>-->
     <script src="data/cc.js"></script>
     <!-- script src="data/loneliness.js"></script> -->
-    
+
     <!-- main map script -->
     <script src="js/map.js"></script>
     <script src="js/imd.js"></script>
