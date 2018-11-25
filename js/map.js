@@ -54,7 +54,7 @@ const UI_MAP_URL = "http://{s}.tile.osm.org/{z}/{x}/{y}.png";
 //TODO: make sure you really need <this>
 const dataUrl = {
     "destitution_url": "./data/destitution.json",
-    "destitution_mig_url": "",
+    "destitution_mig_url": "./data/destitution.json",
     "IMD_url": "../data/imdconfig.json"
 }
 
@@ -659,6 +659,19 @@ destitutionLegend.onAdd = function (map) {
 destitutionLegend.addTo(map);
 $('.legend').hide();
 
+// loader
+var loader = L.control({position: "bottomright"});
+loader.onAdd = function (map) {
+    let div = L.DomUtil.create('div', 'loader-div');
+    div.innerHTML = "<h4>Loading...</h4>";
+
+
+    return div;
+}
+
+loader.addTo(map);
+$('.loader-div').hide();
+
 // functions to show and hide the destitution layer (including the legend)
 function addDestitutionLayer(destitutionLayer) {
     destitutionLayer.layer_name = "destituation";
@@ -671,7 +684,7 @@ function hideDestitutionLayer() {
     $('.legend').hide();
 }
 
-function addDestitutionMigrantsLayer() {
+function addDestitutionMigrantsLayer(destitutionMigrantLayer) {
     destitutionMigrantLayer.addTo(map);
     $('.legend').show();
 }
@@ -680,6 +693,13 @@ function hideDestitutionMigrantsLayer() {
     if (map.hasLayer(destitutionMigrantLayer)) { map.removeLayer(destitutionMigrantLayer); };
     $('.legend').hide();
 }
+
+// fucntion addIMDLayer(IMDLayer) {
+//     if (map.hasLayer(IMDLayer)) {
+//         map.removeLayer(IMDLayer);
+//     }
+//     IMDLayer.addTo(map);
+// }
 
 /*
  * Community Connectors
@@ -753,7 +773,7 @@ function hideExternalLayers() {
                 $('.legend').hide();
             }
             map.removeLayer(layer);
-            console.log(layer);
+            //console.log(layer);
         }
     });
 }
@@ -880,10 +900,12 @@ $('input[name=externalradios]').change(function () {
 
     switch (extLayer) {
         case "none":
+            $('.loader-div').hide();
             hideExternalLayers();
             break;
         case "destitution":
             hideExternalLayers();
+            $('.loader-div').show();
 
             $.ajax({
                 type: "GET",
@@ -899,6 +921,7 @@ $('input[name=externalradios]').change(function () {
                         pane: "external"
                     });
                     if ((destitutionLayer != undefined) || (destitutionLayer != null)) {
+                        $('.loader-div').hide();
                         addDestitutionLayer(destitutionLayer);
                     }
                 }
@@ -907,12 +930,31 @@ $('input[name=externalradios]').change(function () {
             break;
         case "migrants":
             hideExternalLayers();
-            //TODO: use same structure as destitution
-            addDestitutionMigrantsLayer();
+            $('.loader-div').show();
+
+            $.ajax({
+               type: "GET",
+                url: dataUrl.destitution_mig_url,
+                dataType: "JSON",
+                error: (err) => {
+                   console.log(`Error: ${err}`);
+                },
+                success: (data) => {
+                   let destitutionMigrantLayer = L.geoJSON(data, {
+                       style: destitutionMigrantStyle,
+                       pane: "external"
+                   });
+
+                   if ((destitutionMigrantLayer != undefined) || (destitutionMigrantLayer != null)) {
+                       $('.loader-div').hide();
+                       addDestitutionMigrantsLayer(destitutionMigrantLayer);
+                   }
+                }
+            });
+
             break;
         case "imd":
             hideExternalLayers();
-            //TODO: use same structure as destitution-migrant
             addIMDLayer();
             break;
     }
