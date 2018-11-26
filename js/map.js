@@ -21,6 +21,45 @@ if (!Array.prototype.includes) {
 /*
  * https://stackoverflow.com/a/2901298
  */
+
+/**************    Local Variables    ******************/
+
+const UI_MAP_URL = "http://{s}.tile.osm.org/{z}/{x}/{y}.png";
+
+/*******************************************************/
+
+/**************   Async data pulling  ******************/
+// let cucu
+// function pullDataAsync(url, callerFunction) {
+//     $.ajax({
+//         type: "GET",
+//         url: url.toString(),
+//         dataType: "JSON",
+//         error: (err) => {
+//             console.log(err.responseText);
+//
+//         },
+//         success: (data) => {
+//             //console.log(`Error: ${e.status}: ${e.statusText}`);
+//             //console.log(e);
+//             console.log(data);
+//             cucu = JSON.parse(data);
+//         }
+//     });
+// }
+
+/*******************************************************/
+/*****************  URL data source obj  ***************/
+
+//TODO: make sure you really need <this>
+const dataUrl = {
+    "destitution_url": "./data/destitution.json",
+    "destitution_mig_url": "./data/destitution.json",
+    "IMD_url": "../data/imdconfig.json"
+}
+
+/*******************************************************/
+
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -42,8 +81,8 @@ $("#staff_level").slider({
     value: 1,
     range: true,
     tooltip: "show",
-    ticks: [1,2,3,4,5,6,7,8,9],
-    ticks_labels: ["1","2","3","4","5","6","7","8","9"]
+    ticks: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    ticks_labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 });
 
 $("#radius").slider({
@@ -142,11 +181,11 @@ $('.list-group.checked-list-box .list-group-item-check').each(function () {
     init();
 });
 
-$("#check-list-box").on("click", function(e) {
+$("#check-list-box").on("click", function (e) {
     e.preventDefault();
     filterDivision = [];
     var counter = 0;
-    $("#check-list-box li.selected").each(function(idx, li) {
+    $("#check-list-box li.selected").each(function (idx, li) {
         filterDivision[counter] = $(li).text();
         counter++;
     });
@@ -188,17 +227,17 @@ var map = L.map("map", {
 //     accessToken: 'pk.eyJ1IjoiYnJjbWFwcyIsImEiOiJRZklIbXY0In0.SeDBAb72saeEJhTVDrVusg'
 // }).addTo(map);
 
-lonelylayer = new L.TileLayer.WMS(
-    "https://api.mapbox.com/styles/v1/brcmaps.8j731yn3/cjo9zbafk0ufs2snv0ogclf7b/wmts?access_token=pk.eyJ1IjoiYnJjbWFwcyIsImEiOiJRZklIbXY0In0.SeDBAb72saeEJhTVDrVusg",
-).addTo(map);
+// lonelylayer = new L.TileLayer.WMS(
+//     "https://api.mapbox.com/styles/v1/brcmaps.8j731yn3/cjo9zbafk0ufs2snv0ogclf7b/wmts?access_token=pk.eyJ1IjoiYnJjbWFwcyIsImEiOiJRZklIbXY0In0.SeDBAb72saeEJhTVDrVusg",
+// ).addTo(map);
 
 //gl._glMap.addSource({...})
 
 L.control.zoom({ position: 'bottomright' }).addTo(map);
 
 map.fitBounds([  // fit to boundary of UK: https://gist.github.com/UsabilityEtc/6d2059bd4f0181a98d76
-        [59.478568831926395, -10.8544921875],
-        [49.82380908513249, 2.021484375]
+    [59.478568831926395, -10.8544921875],
+    [49.82380908513249, 2.021484375]
 ]);
 
 var tiles_url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';  // Open Street Map
@@ -255,13 +294,13 @@ function addVolsHeatmap() {
     // filter volunteers by basis
     if (filterVolsBasis !== "All") {
         //volsFiltered = volsFiltered.filter(v => v.Basis === filterVolsBasis);
-        volsFiltered = _.filter(volsFiltered, function(v) {return v.Basis === filterVolsBasis})
+        volsFiltered = _.filter(volsFiltered, function (v) { return v.Basis === filterVolsBasis })
     }
 
     // filter volunteers by service/division
     if (filterDivision != null && filterDivision.length > 0) {
         //volsFiltered = volsFiltered.filter(v => filterDivision.includes(v.Division));
-        volsFiltered = _.filter(volsFiltered, function(v) {return filterDivision.includes(v.Division)})
+        volsFiltered = _.filter(volsFiltered, function (v) { return filterDivision.includes(v.Division) })
     }
 
     // FEATURES NOT IMPLEMENTED:
@@ -269,7 +308,7 @@ function addVolsHeatmap() {
     // 2. volunteers don't have levels, so ignore that too
 
     // extract only latitude/longitude from vols array
-    var vols_coords = _.map(volsFiltered, function(v) { return _.pick(v, "Latitude", "Longitude"); });
+    var vols_coords = _.map(volsFiltered, function (v) { return _.pick(v, "Latitude", "Longitude"); });
     var vols_coords_arr = vols_coords.map(Object.values);  // convert to array of arrays rather than array of objects
     //var vols_coords_arr = Object.keys(vols_coords).map(function(i) { return vols_coords[i] });
 
@@ -297,7 +336,7 @@ var filterStaff = document.getElementById("show_staff").value;  // for storing w
 var filterStaffLevels = $("#staff_level").slider("getValue");
 
 // preload heatmap gradient image to stop the "WebGL warning: drawArrays: This operation requires zeroing texture data. This is slow." warnings
-var textureBlue= new Image();
+var textureBlue = new Image();
 textureBlue.src = "js/webgl-heatmap/deep-sea-gradient.png";
 
 var staffHeatmap = L.webGLHeatmap({
@@ -323,7 +362,7 @@ function addStaffHeatmap() {
 
         //staffFiltered = staffFiltered.filter(s => s.Level >= staffLevels[0] & s.Level <= staffLevels[1]);
 
-        staffFiltered = staffFiltered.filter(function(s) {
+        staffFiltered = staffFiltered.filter(function (s) {
             return s.Level >= staffLevels[0] & s.Level <= staffLevels[1];
         });
     }
@@ -331,26 +370,26 @@ function addStaffHeatmap() {
     // filter volunteers by service/division
     if (filterDivision != null && filterDivision.length > 0) {
         //staffFiltered = staffFiltered.filter(s => filterDivision.includes(s.Division));
-        staffFiltered = _.filter(staffFiltered, function(s) { return filterDivision.includes(s.Division) });
+        staffFiltered = _.filter(staffFiltered, function (s) { return filterDivision.includes(s.Division) });
     }
 
     // filter staff based in UKO
     if (!$("#show_uko").prop("checked")) {
-        staffFiltered = _.filter(staffFiltered, function(s) { return s.UKO == 0 });
+        staffFiltered = _.filter(staffFiltered, function (s) { return s.UKO == 0 });
     }
 
     // filter staff based in SSC
     if (!$("#show_ssc").prop("checked")) {
-        staffFiltered = _.filter(staffFiltered, function(s) { return s.SSC == 0 });
+        staffFiltered = _.filter(staffFiltered, function (s) { return s.SSC == 0 });
     }
 
     // filter staff based in RCT
     if (!$("#show_rct").prop("checked")) {
-        staffFiltered = _.filter(staffFiltered, function(s) { return s.RCT == 0 });
+        staffFiltered = _.filter(staffFiltered, function (s) { return s.RCT == 0 });
     }
 
     // extract only latitude/longitude from vols array
-    var staff_coords = _.map(staffFiltered, function(v) { return _.pick(v, "Latitude", "Longitude"); });
+    var staff_coords = _.map(staffFiltered, function (v) { return _.pick(v, "Latitude", "Longitude"); });
     var staff_coords_arr = staff_coords.map(Object.values);  // convert to array of arrays rather than array of objects
     //var staff_coords_arr = Object.keys(staff_coords).map(function(i) { return staff_coords[i] });
 
@@ -391,9 +430,9 @@ function initServices() {
     });*/
 
     // popup for services from new website
-    services = services.map(function(s) {
+    services = services.map(function (s) {
         s.popup = "<b>" + s.ServiceName + "</b><br/><br/>" +
-            "<b>Services:</b><ul>" + s.Services+ "</ul>" +
+            "<b>Services:</b><ul>" + s.Services + "</ul>" +
             "<b>Address:</b> " + s.Address + "<br/><br/>" +
             "<b>Phone number:</b> " + s.Telephone;
         return s;
@@ -414,18 +453,18 @@ function addServices() {
     // filter services/divisions
     if (filterDivision != null && filterDivision.length > 0) {
         //staffFiltered = staffFiltered.filter(s => filterDivision.includes(s.Division));
-        servicesFiltered = _.filter(servicesFiltered, function(s) { return filterDivision.includes(s.ServiceType) });
+        servicesFiltered = _.filter(servicesFiltered, function (s) { return filterDivision.includes(s.ServiceType) });
     }
 
     // extract only latitude/longitude from vols array
-    var svc_coords = _.map(servicesFiltered, function(v) { return _.pick(v, "Latitude", "Longitude", "popup"); });
+    var svc_coords = _.map(servicesFiltered, function (v) { return _.pick(v, "Latitude", "Longitude", "popup"); });
     var svc_coords_arr = svc_coords.map(Object.values);  // convert to array of arrays rather than array of objects
 
     // add to map
     var markers = new Array(svc_coords_arr.length);
 
     for (var i = 0; i < svc_coords_arr.length; i++) {
-        markers[i] = new L.marker([svc_coords_arr[i][0],svc_coords_arr[i][1]], {icon: iconService})
+        markers[i] = new L.marker([svc_coords_arr[i][0], svc_coords_arr[i][1]], { icon: iconService })
             .bindPopup(svc_coords_arr[i][2]);
     }
 
@@ -447,7 +486,7 @@ var propertiesLayer;  // stores all markers for properties
 
 // create popups HTML text for each service
 function initProperties() {
-    props = props.map(function(s) {
+    props = props.map(function (s) {
         s.popup = "<b>" + s.Description + "</b><br/><br/>" +
             "<b>UPC:</b> " + s.UPC + "<br/>" +
             "<b>Type:</b> " + s.Type + "<br/><br/>" +
@@ -470,18 +509,18 @@ function addProperties() {
 
     // filter services/divisions
     if (filterDivision != null && filterDivision.length > 0) {
-        propsFiltered = _.filter(propsFiltered, function(s) { return filterDivision.includes(s.Division) });
+        propsFiltered = _.filter(propsFiltered, function (s) { return filterDivision.includes(s.Division) });
     }
 
     // extract only latitude/longitude from vols array
-    var prop_coords = _.map(propsFiltered, function(v) { return _.pick(v, "Latitude", "Longitude", "popup"); });
+    var prop_coords = _.map(propsFiltered, function (v) { return _.pick(v, "Latitude", "Longitude", "popup"); });
     var prop_coords_arr = prop_coords.map(Object.values);  // convert to array of arrays rather than array of objects
 
     // add to map
     var markers = new Array(prop_coords_arr.length);
 
     for (var i = 0; i < prop_coords_arr.length; i++) {
-        markers[i] = new L.marker([prop_coords_arr[i][0], prop_coords_arr[i][1]], {icon: iconProperty})
+        markers[i] = new L.marker([prop_coords_arr[i][0], prop_coords_arr[i][1]], { icon: iconProperty })
             .bindPopup(prop_coords_arr[i][2]);
     }
 
@@ -503,7 +542,7 @@ var shopsLayer;  // stores all markers for properties
 
 // create popups HTML text for each service
 function initShops() {
-    shops = shops.map(function(s) {
+    shops = shops.map(function (s) {
         s.popup = "<b>" + s.Description + "</b><br/><br/>" +
             "<b>UPC:</b> " + s.UPC + "<br/>" +
             "<b>Type:</b> " + s.Type + "<br/><br/>" +
@@ -530,14 +569,14 @@ function addShops() {
     // }
 
     // extract only latitude/longitude from vols array
-    var shop_coords = _.map(shopsFiltered, function(v) { return _.pick(v, "Latitude", "Longitude", "popup"); });
+    var shop_coords = _.map(shopsFiltered, function (v) { return _.pick(v, "Latitude", "Longitude", "popup"); });
     var shop_coords_arr = shop_coords.map(Object.values);  // convert to array of arrays rather than array of objects
 
     // add to map
     var markers = new Array(shop_coords_arr.length);
 
     for (var i = 0; i < shop_coords_arr.length; i++) {
-        markers[i] = new L.marker([shop_coords_arr[i][0], shop_coords_arr[i][1]], {icon: iconShop})
+        markers[i] = new L.marker([shop_coords_arr[i][0], shop_coords_arr[i][1]], { icon: iconShop })
             .bindPopup(shop_coords_arr[i][2]);
     }
 
@@ -552,15 +591,15 @@ function addShops() {
 // colours for destitution
 function getDestitutionColour(d) {
     return d == 1 ? "#F7FBFF" :
-           d == 2 ? "#E1EDF8" :
-           d == 3 ? "#CBDFF1" :
-           d == 4 ? "#ACD0E6" :
-           d == 5 ? "#83BADB" :
-           d == 6 ? "#5AA1CF" :
-           d == 7 ? "#3987C0" :
-           d == 8 ? "#1D6AAF" :
-           d == 9 ? "#084D96" :
-                    "#08306B"
+        d == 2 ? "#E1EDF8" :
+            d == 3 ? "#CBDFF1" :
+                d == 4 ? "#ACD0E6" :
+                    d == 5 ? "#83BADB" :
+                        d == 6 ? "#5AA1CF" :
+                            d == 7 ? "#3987C0" :
+                                d == 8 ? "#1D6AAF" :
+                                    d == 9 ? "#084D96" :
+                                        "#08306B"
 }
 
 // style for destitution polygons
@@ -584,18 +623,16 @@ function destitutionMigrantStyle(feature) {
     };
 }
 
-var destitutionLayer = L.geoJSON(destitution, {
-    style: destitutionStyle,
-    pane: "external"
-});
 
-var destitutionMigrantLayer = L.geoJSON(destitution, {
-    style: destitutionMigrantStyle,
-    pane: "external"
-});
+
+// var destitutionMigrantLayer = L.geoJSON(cucu, {
+//     style: destitutionMigrantStyle,
+//     pane: "external"
+// });
 
 // legend for destitution
-var destitutionLegend = L.control({position: "topright"});
+//TODO: use legend creation for a loader
+var destitutionLegend = L.control({ position: "topright" });
 
 destitutionLegend.onAdd = function (map) {
 
@@ -604,9 +641,9 @@ destitutionLegend.onAdd = function (map) {
         labels = [];
 
     div.innerHTML = "<h4>Destitution index</h4>" +
-                    "Destitution within local authorities,<br/>" +
-                    "from the <a href='https://www.jrf.org.uk/report/destitution-uk-2018' target='_blank'>Destitution in the UK 2018 report</a>.<br/><br/>" +
-                    "1 = lowest; 10 = highest destitution<br/>";
+        "Destitution within local authorities,<br/>" +
+        "from the <a href='https://www.jrf.org.uk/report/destitution-uk-2018' target='_blank'>Destitution in the UK 2018 report</a>.<br/><br/>" +
+        "1 = lowest; 10 = highest destitution<br/>";
 
     // loop through our destitution intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
@@ -622,8 +659,22 @@ destitutionLegend.onAdd = function (map) {
 destitutionLegend.addTo(map);
 $('.legend').hide();
 
+// loader
+var loader = L.control({position: "bottomright"});
+loader.onAdd = function (map) {
+    let div = L.DomUtil.create('div', 'loader-div');
+    div.innerHTML = "<h4>Loading...</h4>";
+
+
+    return div;
+}
+
+loader.addTo(map);
+$('.loader-div').hide();
+
 // functions to show and hide the destitution layer (including the legend)
-function addDestitutionLayer() {
+function addDestitutionLayer(destitutionLayer) {
+    destitutionLayer.layer_name = "destituation";
     destitutionLayer.addTo(map);
     $('.legend').show();
 }
@@ -633,7 +684,7 @@ function hideDestitutionLayer() {
     $('.legend').hide();
 }
 
-function addDestitutionMigrantsLayer() {
+function addDestitutionMigrantsLayer(destitutionMigrantLayer) {
     destitutionMigrantLayer.addTo(map);
     $('.legend').show();
 }
@@ -642,6 +693,13 @@ function hideDestitutionMigrantsLayer() {
     if (map.hasLayer(destitutionMigrantLayer)) { map.removeLayer(destitutionMigrantLayer); };
     $('.legend').hide();
 }
+
+// fucntion addIMDLayer(IMDLayer) {
+//     if (map.hasLayer(IMDLayer)) {
+//         map.removeLayer(IMDLayer);
+//     }
+//     IMDLayer.addTo(map);
+// }
 
 /*
  * Community Connectors
@@ -709,16 +767,22 @@ lonelinessLayer.addTo(map);
  * Function to hide all external map layers from the map
  */
 function hideExternalLayers() {
-    hideIMDLayer();
-    hideDestitutionLayer();
-    hideDestitutionMigrantsLayer();
+    map.eachLayer((layer) => {
+        if(layer._url != UI_MAP_URL) {
+            if(layer.layer_name != "destituation") {
+                $('.legend').hide();
+            }
+            map.removeLayer(layer);
+            //console.log(layer);
+        }
+    });
 }
 
 /*
  * Event listeners for form elements
  */
 // listener for the volunteer filter dropdown (all, regular, occasional, skills gap)
-$('#vol_options').change(function() {
+$('#vol_options').change(function () {
     //filterVolsBasis = $('input[name=vol_options]:checked').val();
     filterVolsBasis = $(this).val();
     // console.log("Filter changed to ", filterVolsBasis);
@@ -728,7 +792,7 @@ $('#vol_options').change(function() {
 });
 
 // listener for whether to show volunteer roles or people (or hide the heatmap)
-$('input[name=show_vols]').change(function() {
+$('input[name=show_vols]').change(function () {
     filterVolsType = $('input[name=show_vols]:checked').val();
     // console.log("Filter changed to ", filterVolsType);
 
@@ -747,57 +811,57 @@ $('input[name=show_vols]').change(function() {
 
 // listener for whether to show staff or hide the heatmap
 //$("#show_staff").on("input", function() {
-$('input[name=show_staff]').change(function() {
+$('input[name=show_staff]').change(function () {
     filterStaff = $('input[name=show_staff]:checked').val();
     //console.log("Filter changed to ", filterStaff);
     addStaffHeatmap();
 });
 
-$("#staff_level").change(function() {
+$("#staff_level").change(function () {
     console.log("Slider values: ", $("#staff_level").slider("getValue"));
     addStaffHeatmap();
 })
 
-$("#show_uko").change(function() {
+$("#show_uko").change(function () {
     addStaffHeatmap();
 });
 
-$("#show_ssc").change(function() {
+$("#show_ssc").change(function () {
     addStaffHeatmap();
 });
 
-$("#show_rct").change(function() {
+$("#show_rct").change(function () {
     addStaffHeatmap();
 });
 
-$("#show_servs").change(function() {
+$("#show_servs").change(function () {
     addServices();
 });
 
-$("#show_props").change(function() {
+$("#show_props").change(function () {
     addProperties();
 });
 
-$("#show_shops").change(function() {
+$("#show_shops").change(function () {
     addShops();
 });
 
-$("#show_cc").change(function() {
+$("#show_cc").change(function () {
     addcommconnectLayer();
 });
 
 // when user clicks on the 'people' tab, relayout the slider (otherwise marker text doesn't get displayed properly)
-$("#tabpeople").on("click", function() {
+$("#tabpeople").on("click", function () {
     $("#staff_level").slider("relayout");
 });
 
 // update the radius slider text when the user drags it...
-$("#radius").on("slide", function(r) {
+$("#radius").on("slide", function (r) {
     $("#radiusVal").text(r.value / 1000);
 });
 
 //... but only update the heatmaps when they have finished sliding the slider
-$("#radius").on("change", function(r) {
+$("#radius").on("change", function (r) {
     $("#radiusVal").text(r.value / 1000);
 
     addVolsHeatmap();
@@ -805,24 +869,24 @@ $("#radius").on("change", function(r) {
 });
 
 // update the volunteer heatmap opacity slider text when the user drags it...
-$("#opacityVols").on("slide", function(r) {
+$("#opacityVols").on("slide", function (r) {
     $("#opacityVolsVal").text(r.value * 100);
 });
 
 //... but only update the heatmaps when they have finished sliding the slider
-$("#opacityVols").on("change", function(r) {
+$("#opacityVols").on("change", function (r) {
     $("#opacityVolsVal").text(r.value * 100);
 
     addVolsHeatmap();
 });
 
 // update the opacity slider text when the user drags it...
-$("#opacityStaff").on("slide", function(r) {
+$("#opacityStaff").on("slide", function (r) {
     $("#opacityStaffVal").text(r.value * 100);
 });
 
 //... but only update the heatmaps when they have finished sliding the slider
-$("#opacityStaff").on("change", function(r) {
+$("#opacityStaff").on("change", function (r) {
     $("#opacityStaffVal").text(r.value * 100);
 
     addStaffHeatmap();
@@ -830,21 +894,64 @@ $("#opacityStaff").on("change", function(r) {
 
 // external map layers
 //$("#externalradios").on("input", function() {
-$('input[name=externalradios]').change(function() {
+$('input[name=externalradios]').change(function () {
     var extLayer = $('input[name=externalradios]:checked').val();
     console.log("Filter changed to ", extLayer);
 
-    switch(extLayer) {
+    switch (extLayer) {
         case "none":
+            $('.loader-div').hide();
             hideExternalLayers();
             break;
         case "destitution":
             hideExternalLayers();
-            addDestitutionLayer();
+            $('.loader-div').show();
+
+            $.ajax({
+                type: "GET",
+                url: dataUrl.destitution_url,
+                dataType: "JSON",
+                error: (err) => {
+                    console.log(`Error: ${err}`);
+                },
+                success: (data) => {
+                    // Get the geo-data and dump it into a variable
+                    let destitutionLayer = L.geoJSON(data, {
+                        style: destitutionStyle,
+                        pane: "external"
+                    });
+                    if ((destitutionLayer != undefined) || (destitutionLayer != null)) {
+                        $('.loader-div').hide();
+                        addDestitutionLayer(destitutionLayer);
+                    }
+                }
+            });
+
             break;
         case "migrants":
             hideExternalLayers();
-            addDestitutionMigrantsLayer();
+            $('.loader-div').show();
+
+            $.ajax({
+               type: "GET",
+                url: dataUrl.destitution_mig_url,
+                dataType: "JSON",
+                error: (err) => {
+                   console.log(`Error: ${err}`);
+                },
+                success: (data) => {
+                   let destitutionMigrantLayer = L.geoJSON(data, {
+                       style: destitutionMigrantStyle,
+                       pane: "external"
+                   });
+
+                   if ((destitutionMigrantLayer != undefined) || (destitutionMigrantLayer != null)) {
+                       $('.loader-div').hide();
+                       addDestitutionMigrantsLayer(destitutionMigrantLayer);
+                   }
+                }
+            });
+
             break;
         case "imd":
             hideExternalLayers();
@@ -853,12 +960,12 @@ $('input[name=externalradios]').change(function() {
     }
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
     $('[data-toggle="popover"]').popover();
     $("#tabhome").popover('show');
 });
 
-$(window).load(function() {
+$(window).load(function () {
     addVolsHeatmap();
     addStaffHeatmap();
 

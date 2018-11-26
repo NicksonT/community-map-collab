@@ -1,66 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-N96SR2');</script>
-    <!-- End Google Tag Manager -->
-
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-KKTZ7CB');</script>
-    <!-- End Google Tag Manager -->
-    
     <title>Community Presence Map | British Red Cross</title>
-
-    <!--[if lte IE 8]><script type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
-
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat" type="text/css" /> -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" />
-    <!-- <link rel="stylesheet" href="css/leaflet.min.css" /> -->
-
     <link rel="stylesheet" href="css/leaflet-sidebar.min.css" />
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" integrity="sha256-EFpFyBbuttUJtoocYzsBnERPWee2JYz4cn5nkUBjW0A=" crossorigin="anonymous" /> -->
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+          crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/bootstrap-slider.min.css" />
     <link rel="stylesheet" href="css/funkyradio.min.css" />
-
-    <!-- <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script> -->
     <script src="https://cdn.polyfill.io/v2/polyfill.js?features=Array.prototype.map,Array.prototype.includes,Object.values"></script>
-
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script> -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
     <script src="js/bootstrap.min.js"></script>
-
     <script src="js/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
     <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
-    <!-- <script src="js/leaflet-src.js"></script> -->
-
     <script src="js/leaflet-sidebar.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js" integrity="sha256-iwOC2Y7nazcGcp6/ssCIuZviWKow9gVN5ntSdgI0jQc=" crossorigin="anonymous"></script> -->
 
-    <!-- Tile caching
-    <script src="https://unpkg.com/pouchdb@^5.2.0/dist/pouchdb.js"></script>
-    <script src="https://unpkg.com/leaflet.tilelayer.pouchdbcached@latest/L.TileLayer.PouchDBCached.js"></script>
-    -->
 
     <script type="text/javascript" src="js/webgl-heatmap/webgl-heatmap.js"></script>
     <script type="text/javascript" src="js/leaflet-webgl-heatmap.min.js"></script>
@@ -92,7 +55,8 @@
             outline: none;
             touch-action: none;
             background-color: #ffffff;
-            position: relative;
+
+            /*position: relative;*/
         }
 
         .sidebar-content {
@@ -139,7 +103,7 @@
         .list-group-item-indent {
             padding-left: 30px;
         }
-        
+
         /*
          * styling for external data 
          * from: https://leafletjs.com/examples/choropleth/
@@ -167,23 +131,29 @@
             margin-right: 8px;
             opacity: 0.7;
         }
+
     </style>
 </head>
+
 <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KKTZ7CB"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KKTZ7CB" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
     <div id="sidebar" class="sidebar collapsed">
         <!-- Nav tabs -->
         <div class="sidebar-tabs">
             <ul role="tablist">
-                <li><a href="#home" id="tabhome" role="tab" title="Community Presence Map" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Click here to get started"><i class="fa fa-question"></i></a></li>
-                <li><a href="#people" id="tabpeople" role="tab" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Staff and volunteers"><i class="fa fa-user"></i></a></li>
-                <li><a href="#services" id="tabservices" role="tab" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Services, shops, properties"><i class="fa fa-plus-square"></i></a></li>
-                <li><a href="#layers" id="tablayers" role="tab" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="External data"><i class="fa fa-globe-africa"></i></a></li>
-                <li><a href="#settings" id="tabsettings" role="tab" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Other settings"><i class="fa fa-cog"></i></a></li>
+                <li><a href="#home" id="tabhome" role="tab" title="Community Presence Map" data-toggle="popover"
+                       data-trigger="hover" data-placement="right" data-content="Click here to get started"><i class="fa fa-question"></i></a></li>
+                <li><a href="#people" id="tabpeople" role="tab" data-toggle="popover" data-trigger="hover"
+                       data-placement="right" data-content="Staff and volunteers"><i class="fa fa-user"></i></a></li>
+                <li><a href="#services" id="tabservices" role="tab" data-toggle="popover" data-trigger="hover"
+                       data-placement="right" data-content="Services, shops, properties"><i class="fa fa-plus-square"></i></a></li>
+                <li><a href="#layers" id="tablayers" role="tab" data-toggle="popover" data-trigger="hover"
+                       data-placement="right" data-content="External data"><i class="fa fa-globe-africa"></i></a></li>
+                <li><a href="#settings" id="tabsettings" role="tab" data-toggle="popover" data-trigger="hover"
+                       data-placement="right" data-content="Other settings"><i class="fa fa-cog"></i></a></li>
             </ul>
 
             <!-- will implement the download button later
@@ -200,51 +170,66 @@
                     Community Presence Map
                     <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
-                <br/>
+                <br />
                 <p>The Community Presence Map shows where the British Red Cross currently operates in the UK.</p>
-                <p>When you open the webpage, you will see two heatmaps: green represents our volunteers and blue is our staff.</p>
-                <p>This section contains some introductory information about the Community Presence Map. There is also <a href="help.html" target="_blank">a more comprehensive guide available to read</a>.</p>
+                <p>When you open the webpage, you will see two heatmaps: green represents our volunteers and blue is
+                    our staff.</p>
+                <p>This section contains some introductory information about the Community Presence Map. There is also
+                    <a href="help.html" target="_blank">a more comprehensive guide available to read</a>.</p>
                 <h5>Using this map</h5>
-                <p>The menu to the left of this message contains a set of options you can use to customise the map. Click the <i class="fa fa-caret-left"></i> icon in the top-right corner to hide this sidebar so you can see more of the map.</p>
-                <p><i class="fa fa-user"></i> contains different options for displaying information about staff and volunteers. You can choose to show or hide both heatmaps. For volunteers, you can choose whether to display volunteer roles or only individual people (one person can have multiple roles). For staff, you can choose to show only people whose roles are between particular levels.</p>
-                <p><i class="fa fa-plus-square"></i> lets you filter what you see by BRC service or directorate, and also lets you see where our services, shops and other properties are located. Services include only those listed on our main website, so several will be missing.</p>
-                <p><i class="fa fa-globe-africa"></i> will let you add external data to the map. Currently you can only see the <a href="https://socialvalueportal.com/indices-of-multiple-deprivation-in-the-uk/" target="_blank">Index of Multiple Deprivation</a> for England.</p>
-                <p><i class="fa fa-cog"></i> lets you change the radius drawn around each person on the volunteer and staff heatmaps. By default, each person has a 25km radius drawn around them.</p>
+                <p>The menu to the left of this message contains a set of options you can use to customise the map.
+                    Click the <i class="fa fa-caret-left"></i> icon in the top-right corner to hide this sidebar so you
+                    can see more of the map.</p>
+                <p><i class="fa fa-user"></i> contains different options for displaying information about staff and
+                    volunteers. You can choose to show or hide both heatmaps. For volunteers, you can choose whether to
+                    display volunteer roles or only individual people (one person can have multiple roles). For staff,
+                    you can choose to show only people whose roles are between particular levels.</p>
+                <p><i class="fa fa-plus-square"></i> lets you filter what you see by BRC service or directorate, and
+                    also lets you see where our services, shops and other properties are located. Services include only
+                    those listed on our main website, so several will be missing.</p>
+                <p><i class="fa fa-globe-africa"></i> will let you add external data to the map. Currently you can only
+                    see the <a href="https://socialvalueportal.com/indices-of-multiple-deprivation-in-the-uk/" target="_blank">Index
+                        of Multiple Deprivation</a> for England.</p>
+                <p><i class="fa fa-cog"></i> lets you change the radius drawn around each person on the volunteer and
+                    staff heatmaps. By default, each person has a 25km radius drawn around them.</p>
                 <h5>More information</h5>
-                <p>There are more interactive maps available on the <a href="http://data.redcross.org.uk" target="_blank">Innovation &amp; Insight Data Hub</a>.</p>
+                <p>There are more interactive maps available on the <a href="http://data.redcross.org.uk" target="_blank">Innovation
+                    &amp; Insight Data Hub</a>.</p>
                 <!-- <p>Add a tracker for bugs and feature requests</p> -->
-                <p>This map is developed and maintained by <a href="mailto:MattThomas@redcross.org.uk">Matt Thomas</a>. Please get in touch if you have any comments, questions or suggestions.</p>
+                <p>This map is developed and maintained by <a href="mailto:MattThomas@redcross.org.uk">Matt Thomas</a>.
+                    Please get in touch if you have any comments, questions or suggestions.</p>
                 <h5>Data last updated on...</h5>
-                <p>Volunteers: September 2018<br/>
-                CRVs: September 2018<br/>
-                Staff: September 2018<br/>
-                Services: August 2018<br/>
-                Properties: June 2018</p>
+                <p>Volunteers: September 2018<br />
+                    CRVs: September 2018<br />
+                    Staff: September 2018<br />
+                    Services: August 2018<br />
+                    Properties: June 2018</p>
             </div>
 
             <div class="sidebar-pane" id="people">
                 <h1 class="sidebar-header">Staff and volunteers<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-                <br/>
-                <div class="panel panel-default" id="controls">  <!-- style="top:70px;left:10px;width:225px;position:absolute;"> -->
+                <br />
+                <div class="panel panel-default" id="controls">
+                    <!-- style="top:70px;left:10px;width:225px;position:absolute;"> -->
                     <h5>Volunteers heatmap</h5>
                     <div id="show_vols" class="form-group">
                         <label class="control-label" for="show_vols">Show:</label>
                         <div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="show_vols" value="None"/>
+                                    <input type="radio" name="show_vols" value="None" />
                                     <span>Nobody</span>
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="show_vols" value="Roles" checked="checked"/>
+                                    <input type="radio" name="show_vols" value="Roles" checked="checked" />
                                     <span>Roles</span>
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="show_vols" value="People"/>
+                                    <input type="radio" name="show_vols" value="People" />
                                     <span>People</span>
                                 </label>
                             </div>
@@ -261,38 +246,38 @@
                             </select>
                         </div>
                     </div>
-                    <br/>
+                    <br />
                     <h5>Staff heatmap</h5>
                     <div id="show_staff" class="form-group">
                         <label class="control-label" for="show_staff">Show:</label>
                         <div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="show_staff" value="none"/>
+                                    <input type="radio" name="show_staff" value="none" />
                                     <span>Nobody</span>
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="show_staff" value="all" checked="checked"/>
+                                    <input type="radio" name="show_staff" value="all" checked="checked" />
                                     <span>All grades</span>
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="show_staff" value="levels"/>
-                                    <span>Between role grades<br/>(drag the slider)</span><br/><br/>
-                                    <input id="staff_level"/>
+                                    <input type="radio" name="show_staff" value="levels" />
+                                    <span>Between role grades<br />(drag the slider)</span><br /><br />
+                                    <input id="staff_level" />
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <br/>
+                    <br />
                     <h5>Include staff and volunteers who work in...</h5>
                     <div class="form-group">
                         <div class="checkbox">
                             <label>
-                                <input id="show_uko" type="checkbox"/>
+                                <input id="show_uko" type="checkbox" />
                                 <span>UK Office</span>
                             </label>
                         </div>
@@ -300,7 +285,7 @@
                     <div class="form-group">
                         <div class="checkbox">
                             <label>
-                                <input id="show_ssc" type="checkbox"/>
+                                <input id="show_ssc" type="checkbox" />
                                 <span>Shared Service Centre</span>
                             </label>
                         </div>
@@ -308,7 +293,7 @@
                     <div class="form-group">
                         <div class="checkbox">
                             <label>
-                                <input id="show_rct" type="checkbox"/>
+                                <input id="show_rct" type="checkbox" />
                                 <span>Red Cross Training</span>
                             </label>
                         </div>
@@ -318,13 +303,13 @@
 
             <div class="sidebar-pane" id="services">
                 <h1 class="sidebar-header">Services and buildings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-                <br/>
+                <br />
 
                 <h5>Show BRC's...</h5>
                 <div class="form-group">
                     <div class="checkbox">
                         <label>
-                            <input id="show_servs" type="checkbox"/>
+                            <input id="show_servs" type="checkbox" />
                             <span>Services</span>
                         </label>
                     </div>
@@ -332,7 +317,7 @@
                 <div class="form-group">
                     <div class="checkbox">
                         <label>
-                            <input id="show_props" type="checkbox"/>
+                            <input id="show_props" type="checkbox" />
                             <span>Properties</span>
                         </label>
                     </div>
@@ -340,7 +325,7 @@
                 <div class="form-group">
                     <div class="checkbox">
                         <label>
-                            <input id="show_shops" type="checkbox"/>
+                            <input id="show_shops" type="checkbox" />
                             <span>Shops</span>
                         </label>
                     </div>
@@ -348,13 +333,13 @@
                 <div class="form-group">
                     <div class="checkbox">
                         <label>
-                            <input id="show_cc" type="checkbox"/>
+                            <input id="show_cc" type="checkbox" />
                             <span>Community Connector sites</span>
                         </label>
                     </div>
                 </div>
 
-                <br/>
+                <br />
 
                 <h5>Filter by services and other BRC directorates:</h5>
                 <!--<div class="form-group">
@@ -363,7 +348,8 @@
                     </select>
                 </div>-->
 
-                <div class="well" style="overflow: auto;">  <!-- max-height: 300px; -->
+                <div class="well" style="overflow: auto;">
+                    <!-- max-height: 300px; -->
                     <ul id="check-list-box" class="list-group checked-list-box">
                         <li class="list-group-item list-group-item-check">Chief Executive's Office</li>
                         <li class="list-group-item list-group-item-check">Communications &amp; Engagement</li>
@@ -378,7 +364,8 @@
                         <li class="list-group-item list-group-item-check">Strategic Change</li>
                         <li class="list-group-item"><b>UK Operations</b></li>
                         <li class="list-group-item list-group-item-check list-group-item-indent">Ambulance Support</li>
-                        <li class="list-group-item list-group-item-check list-group-item-indent">Community Equipment Services</li>
+                        <li class="list-group-item list-group-item-check list-group-item-indent">Community Equipment
+                            Services</li>
                         <li class="list-group-item list-group-item-check list-group-item-indent">Crisis Response</li>
                         <li class="list-group-item list-group-item-check list-group-item-indent">CRV</li>
                         <li class="list-group-item list-group-item-check list-group-item-indent">Education</li>
@@ -388,22 +375,23 @@
                         <li class="list-group-item list-group-item-check list-group-item-indent">Mobility Aids</li>
                         <li class="list-group-item list-group-item-check list-group-item-indent">Refugee Support</li>
                         <li class="list-group-item list-group-item-check list-group-item-indent">Restoring Family Links</li>
-                        <li class="list-group-item list-group-item-check list-group-item-indent">UK Ops Finance, HR etc.</li>
+                        <li class="list-group-item list-group-item-check list-group-item-indent">UK Ops Finance, HR
+                            etc.</li>
                     </ul>
                 </div>
             </div>
 
             <div class="sidebar-pane" id="layers">
                 <h1 class="sidebar-header">External data<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-                <br/>
-                <p>Choose external data you want to show on the map<br/><br/>(You can only select one at a time)</p>
+                <br />
+                <p>Choose external data you want to show on the map<br /><br />(You can only select one at a time)</p>
 
                 <div id="externalradios" class="funkyradio">
                     <div class="funkyradio-success">
                         <input type="radio" name="externalradios" id="ext-none" value="none" checked />
                         <label for="ext-none">None</label>
                     </div>
-                    
+
                     <div class="funkyradio-success">
                         <input type="radio" name="externalradios" id="ext-dest" value="destitution" />
                         <label for="ext-dest">Destitution</label>
@@ -413,7 +401,7 @@
                         <input type="radio" name="externalradios" id="ext-dest-mig" value="migrants" />
                         <label for="ext-dest-mig">Destitution &ndash; Migrants only</label>
                     </div>
-                    
+
                     <div class="funkyradio-success">
                         <input type="radio" name="externalradios" id="ext-imd" value="imd" />
                         <label for="ext-imd">Index of Multiple Deprivation (England only)</label>
@@ -423,22 +411,22 @@
 
             <div class="sidebar-pane" id="settings">
                 <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-                <br/>
+                <br />
                 <div class="form-group">
-                    <label class="control-label" for="radius">Radius for staff and volunteer heatmaps (km):</label><br/><br/>
-                    <input id="radius"/><br/><br/>
+                    <label class="control-label" for="radius">Radius for staff and volunteer heatmaps (km):</label><br /><br />
+                    <input id="radius" /><br /><br />
                     <span id="radiusLabel">Current radius: <span id="radiusVal">25</span>km</span>
                 </div>
-                <br/>
+                <br />
                 <h5>Transparency of heatmaps</h5>
                 <div class="form-group">
-                    <label class="control-label" for="opacityVols">Volunteers:</label><br/><br/>
-                    <input id="opacityVols"/><br/><br/>
+                    <label class="control-label" for="opacityVols">Volunteers:</label><br /><br />
+                    <input id="opacityVols" /><br /><br />
                     <span id="opacityVolsLabel">Current transparency: <span id="opacityVolsVal">30</span>%</span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="opacityStaff">Staff:</label><br/><br/>
-                    <input id="opacityStaff"/><br/><br/>
+                    <label class="control-label" for="opacityStaff">Staff:</label><br /><br />
+                    <input id="opacityStaff" /><br /><br />
                     <span id="opacityStaffLabel">Current transparency: <span id="opacityStaffVal">30</span>%</span>
                 </div>
             </div>
@@ -446,8 +434,28 @@
     </div>
 
     <div id="map" class="map"></div>
+    <!-- Google Stuff-->
+    <!-- Google Tag Manager -->
+    <!-- <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-N96SR2');</script> -->
+    <!-- End Google Tag Manager -->
 
-    
+    <!-- Google Tag Manager -->
+    <!-- <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-KKTZ7CB');</script> -->
+    <!-- End Google Tag Manager -->
     <!-- load data -->
     <script src="data/vols.js"></script>
     <script src="data/staff.js"></script>
@@ -455,13 +463,14 @@
     <script src="data/services_new.js"></script>
     <script src="data/shops.js"></script>
     <script src="data/props.js"></script>
-    <script src="data/destitution.js"></script>
+    <!--<script src="data/destitution.json"></script>-->
     <script src="data/cc.js"></script>
     <!-- script src="data/loneliness.js"></script> -->
-    
+
     <!-- main map script -->
     <script src="js/map.js"></script>
     <script src="js/imd.js"></script>
-    
+
 </body>
+
 </html>
